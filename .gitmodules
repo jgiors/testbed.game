@@ -1,0 +1,3 @@
+[submodule "i3lib"]
+	path = i3lib
+	url = https://github.com/jgiors/i3lib.git
