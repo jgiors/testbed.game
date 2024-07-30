@@ -6,9 +6,7 @@
 #include <fstream>
 #include <filesystem>
 #include <iostream>
-#include "i3defs.h"
-#include "i3logger.h"
-///@file
+#include "i3lib.h"
 
 using std::cerr;
 using i3::Logger;
