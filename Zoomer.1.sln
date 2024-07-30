@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Zoomer.1", "Zoomer.1.vcxproj", "{442B7F4A-5094-4E8B-96B0-5DCD50B4BFB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0D09C34C-8139-463D-98BD-625C5F7D00BD} = {0D09C34C-8139-463D-98BD-625C5F7D00BD}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "i3lib", "i3lib\i3lib.vcxproj", "{0D09C34C-8139-463D-98BD-625C5F7D00BD}"
 EndProject
