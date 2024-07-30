@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Zoomer.1", "Zoomer.1.vcxproj", "{442B7F4A-5094-4E8B-96B0-5DCD50B4BFB3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "i3lib", "i3lib\i3lib.vcxproj", "{0D09C34C-8139-463D-98BD-625C5F7D00BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{442B7F4A-5094-4E8B-96B0-5DCD50B4BFB3}.Release|x64.Build.0 = Release|x64
 		{442B7F4A-5094-4E8B-96B0-5DCD50B4BFB3}.Release|x86.ActiveCfg = Release|Win32
 		{442B7F4A-5094-4E8B-96B0-5DCD50B4BFB3}.Release|x86.Build.0 = Release|Win32
+		{0D09C34C-8139-463D-98BD-625C5F7D00BD}.Debug|x64.ActiveCfg = Debug|x64
+		{0D09C34C-8139-463D-98BD-625C5F7D00BD}.Debug|x64.Build.0 = Debug|x64
+		{0D09C34C-8139-463D-98BD-625C5F7D00BD}.Debug|x86.ActiveCfg = Debug|Win32
+		{0D09C34C-8139-463D-98BD-625C5F7D00BD}.Debug|x86.Build.0 = Debug|Win32
+		{0D09C34C-8139-463D-98BD-625C5F7D00BD}.Release|x64.ActiveCfg = Release|x64
+		{0D09C34C-8139-463D-98BD-625C5F7D00BD}.Release|x64.Build.0 = Release|x64
+		{0D09C34C-8139-463D-98BD-625C5F7D00BD}.Release|x86.ActiveCfg = Release|Win32
+		{0D09C34C-8139-463D-98BD-625C5F7D00BD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
