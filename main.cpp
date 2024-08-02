@@ -71,7 +71,9 @@ int main(int argc, const char* argv[])
     int result = 0;
 
     std::ofstream logFile;
-    initLogger(logFile);    
+    initLogger(logFile);
+
+    i3::Prng seedPrng;    
 
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);
