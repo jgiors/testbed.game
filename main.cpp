@@ -6,11 +6,13 @@
 #include <fstream>
 #include <filesystem>
 #include <iostream>
+#include <json/single_include/nlohmann/json.hpp>
 #include "i3lib.h"
 #include "initLogger.h"
 
 using std::cerr;
 using i3::Logger;
+using json = nlohmann::json;
 
 namespace {
     constexpr const char* logFilename = "i3log.log";
@@ -23,9 +25,16 @@ int main(int argc, const char* argv[])
     std::ofstream logFile;
     app::initLogger(logFilename, logFile);
 
+    json config;
+
+    {
+        std::ifstream configFile("config.json");
+        config = json::parse(configFile);
+    }
+
     i3::Prng seedPrng;    
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(config["display"]["width"], config["display"]["height"]), "SFML works!");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
