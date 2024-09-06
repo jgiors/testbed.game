@@ -1,14 +1,5 @@
 ///@file
-#include <SFML/Graphics.hpp>
-#include <Windows.h>
-#include <debugapi.h>
-#include <ostream>
-#include <fstream>
-#include <filesystem>
-#include <iostream>
-#include <json/single_include/nlohmann/json.hpp>
-#include "i3lib.h"
-#include "initLogger.h"
+#include "precomp.h"
 
 using std::cerr;
 using i3::Logger;

@@ -1,9 +1,5 @@
 ///@file
-#include "initLogger.h"
-#include "i3logger.h"
-#include "i3error.h"
-#include <iostream>
-#include <filesystem>
+#include "precomp.h"
 
 using std::cerr;
 using i3::Logger;
