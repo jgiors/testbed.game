@@ -57,7 +57,7 @@ int main(int argc, const char* argv[])
         i3logErr << "Exception caught in main()!:\n    " << ex.what() << "\n    Exiting!\n";
     }
     catch(...) {
-        i3logErr << "Unexpected exception (not derived from std::exception) caught in main! Exiting\n";
+        i3logErr << "Unexpected exception (not derived from std::exception) caught in main! Exiting!\n";
     }
 
     return result;
