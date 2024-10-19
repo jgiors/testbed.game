@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cell.cpp" />
     <ClCompile Include="initLogger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="precomp.cpp">
@@ -32,6 +33,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cell.h" />
     <ClInclude Include="initLogger.h" />
     <ClInclude Include="precomp.h" />
   </ItemGroup>
