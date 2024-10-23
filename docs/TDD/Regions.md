@@ -73,3 +73,13 @@ The other sub-regions would be recursed similarly. In the case of this region, t
 ```
 
 The algorithm continues recursively through sub-regions until reaching the current zoom level.
+
+Parameters
+----------
+
+- M x N = maximum region dimensions
+    - The dimensions are the number of subcells wide by tall.
+    - I expect M = N, but the dimensions will be tracked separately, just in case.
+- Z = zoom multiplier = number of sub-cells wide/tall per cell
+    - How much zoom is applied at each level.
+    - Also happens to determine the cell/sub-cell relationship.
