@@ -36,20 +36,40 @@ To reduce the complexity of the example, assume a region contains 4 x 4 cells:
 ****
 ```
 
-Now assume the PCG creates paths through the region:
+Now assume the PCG creates a path through the region:
 
 ```
-** *
-** 
-   *
-* **
+*.**
+*... 
+...*
+*.**
 ```
 
-The lower-right corner contains a 2 x 2 region:
+It contains four sub-regions (aka child regions). From upper-left to lower-right they are:
 
 ```
- *
-**
+*            **             *             .*
+*                                         **
 ```
 
+The width-by-heigh sizes of the sub-regions are: 1 x 2, 2 x 1, 1 x 1, 2 x 2
 
+When the last region (from the lower-right) is recursed, it is multiplied by the scale factor of 2, which results in the following:
+
+```
+..**
+..**
+****
+****
+```
+
+The other sub-regions would be recursed similarly. In the case of this region, the PCG algortihm would cut a path through the region, which might look like the following:
+
+```
+..**
+..*.
+*...
+**.*
+```
+
+The algorithm continues recursively through sub-regions until reaching the current zoom level.
