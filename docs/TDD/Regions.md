@@ -77,9 +77,25 @@ The algorithm continues recursively through sub-regions until reaching the curre
 Parameters
 ----------
 
-- M x N = maximum region dimensions
-    - The dimensions are the number of subcells wide by tall.
-    - I expect M = N, but the dimensions will be tracked separately, just in case.
+- Wmax x Hmax = maximum region dimensions
+    - The dimensions are the number of subcells wide by tall (height).
+    - I expect Wmax = Hmax, but the dimensions will be tracked separately, just in case.
 - Z = zoom multiplier = number of sub-cells wide/tall per cell
     - How much zoom is applied at each level.
     - Also happens to determine the cell/sub-cell relationship.
+        - Each cell contains Z x Z subcells because height and width are constrained by zoom and must be equal.
+
+Maximum sub-region size
+-----------------------
+
+### Sub-region, region, and zoom relationship
+
+- Since there are Z x Z subcells per cell, a sub-region of dimension W x H contains W*Z x W*H sub-cells.
+- Therefore, in order to prevent exceeding Wmax x Hmax:
+
+    Wsubmax * Z = Wmax  ->  Wsubmax = Wmax / Z
+    Hsubmax * Z = Hmax  ->  Hsubmax = Hmax / Z
+
+### Numbers in practice
+
+*todo*
