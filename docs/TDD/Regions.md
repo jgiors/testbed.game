@@ -80,7 +80,7 @@ Parameters
 - Wmax x Hmax = maximum region dimensions
     - The dimensions are the number of subcells wide by tall (height).
     - I expect Wmax = Hmax, but the dimensions will be tracked separately, just in case.
-- Z = zoom multiplier = number of sub-cells wide/tall per cell
+- Z = zoom factor = number of sub-cells wide/tall per cell
     - How much zoom is applied at each level.
     - Also happens to determine the cell/sub-cell relationship.
         - Each cell contains Z x Z subcells because height and width are constrained by zoom and must be equal.
@@ -98,4 +98,6 @@ Maximum sub-region size
 
 ### Numbers in practice
 
-*todo*
+See RegionDimensions.ods
+
+
