@@ -98,6 +98,12 @@ Maximum sub-region size
     Wsubmax * Z = Wmax  ->  Wsubmax = Wmax / Z
     Hsubmax * Z = Hmax  ->  Hsubmax = Hmax / Z
 
+- The number of cells in the maximum-sized region is:
+
+    TotalCells = Wmax * Hmax
+
+- Because of this multiplicative property, the number of cells which must be processed increases rapidly, even for modest sub-region dims and zoom factors.
+
 ### Dividing large sub-regions
 
 Since sub-regions are limited in dimension, some nominal regions will be larger than the maximum region dims. These nominal regions will be split into smaller regions which do not exceed the maximum dims.
@@ -106,4 +112,10 @@ Since sub-regions are limited in dimension, some nominal regions will be larger 
 
 See RegionDimensions.ods
 
+Sub-region bounding box overlap
+-------------------------------
 
+- A sub-region will be processed by finding its bounding box and expanding it out into a region to be processed.
+- This means that bounding boxes are likely to overlap, which in turn means that there is likely to be redundant processing in the overlapping areas. I do not know how much additional processing this will cause. It is difficult to determine what the maximum amount of overlap is.
+- Also, it appears that, the cases which have the worst overlap tend to be skinny pieces that, upon the next recursion, will not produce high overlap. In other words, it seems that things would balance out a bit should the worst-case scenario arise.
+- I will take a look at this again when I can. I would like to be able to calculate a reasonable value, but don't yet know how to do that.
