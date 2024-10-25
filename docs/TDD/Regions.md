@@ -23,7 +23,9 @@ The new concept is based on #regions# instead of #cells#. Regions are still made
 
 ### PCG of regions
 
-The PCG processes a region by removing cells from the region's structure (marking them empty or dust). It might also mark some occupied cells as permanently filled. It is not expected to convert empty cells into occupied or filled. Once the PCG finishes processing a region, it breaks the region into sub-regions, then recursively processes them.
+The PCG processes a region by removing cells from the region's structure (marking them empty or dust). It might also mark some occupied cells as permanently filled. It is not expected to convert empty cells into occupied or filled.
+
+Once the PCG finishes processing a region, it breaks the region into sub-regions, which are contiguous groups of cells. The PCG then expands each sub-region by the zoom factor (explained below) and recursively processes it as a region of the next zoom level.
 
 ### Example
 
@@ -95,6 +97,10 @@ Maximum sub-region size
 
     Wsubmax * Z = Wmax  ->  Wsubmax = Wmax / Z
     Hsubmax * Z = Hmax  ->  Hsubmax = Hmax / Z
+
+### Dividing large sub-regions
+
+Since sub-regions are limited in dimension, some nominal regions will be larger than the maximum region dims. These nominal regions will be split into smaller regions which do not exceed the maximum dims.
 
 ### Numbers in practice
 
