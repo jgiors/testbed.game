@@ -142,4 +142,10 @@ I imagine that the worst case example looks something like this:
 
 In one 5 x 5 region, we have 5 regions that are 3 x 3.
 
+Region stack
+------------
+
+The avatar will be in a particular region in a layer at a particular zoom level. That region will be part of a stack of ancestor regions, which must also remain memory-resident so that zooming-out can be performed efficiently, and so that escape out can be performed properly.
+
+
 [^dust]: It is possible that, in a future version of the game, there may be cells which act as empty, but on zoom, actually have some occupied subcells (think of them as dust). This is not compatible with the current design (2024-10-26) since sub-regions now have entry and exit points, and zoom can not be activated arbitrarily. Should the design change, dust may be reevaluated.
