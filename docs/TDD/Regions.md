@@ -6,7 +6,7 @@ Background
 
 ### Motivation
 
-While working on this project, I had an idea to recurse in regions within a region instaed of recursing by each cell (if this is not clear, continue on and come back to this later). I was about to implement cells (as class engine::Cell), but I realized that there is a significant and fundamental difference between the two concepts. Hence, I need to delve into the design requirements in detail and see what emerges.
+While working on this project, I had an idea to recurse in regions within a region instaed of recursing by each cell (if this is not clear, continue on and come back to this later). I was about to implement cells (as class engine::Cell), but I realized that there is a significant and fundamental difference between the two concepts.
 
 ### Cells
 
@@ -19,11 +19,17 @@ Concept
 
 ### What is a region?
 
-The new concept is based on *regions* instead of *cells*. Regions are still made of cells and can be of arbitrary shape, though their extent is limited to prevent excessive recursion and memory consumption. Cells within a region may be occupied, empty, or filled. [^dust]
+#### Concept
+
+The new concept is based on *regions* instead of *cells*. A region is a contiguous, connected group of cells, and can be of arbitrary shape, though their extent is limited to prevent excessive memory consumption and processing time. Cells within a region may be occupied, or filled. Occupied cells subdivide into subcells. Filled cells are completely filled and impassable.
+
+#### class `Region`
+
+In order to simplify working with regions, a region is stored in a rectangular 2D array. The 2D array's dimensions are chosen so that the conceptual region fits within the rectangular area. Empty cells surround the region to fill out the remainder of the rectangle. [^dust]
 
 ### PCG of regions
 
-The PCG processes a region by removing cells from the region's structure (marking them empty or dust). It might also mark some occupied cells as permanently filled. It is not expected to convert empty cells into occupied or filled.
+The PCG processes a region by removing cells from the region's structure (marking them empty). It might also mark some occupied cells as permanently filled. It is not expected to convert empty cells into occupied or filled.
 
 Once the PCG finishes processing a region, it breaks the region into sub-regions, which are contiguous groups of cells. The PCG then expands each sub-region by the zoom factor (explained below) and recursively processes it as a region of the next zoom level.
 
