@@ -10,7 +10,7 @@ While working on this project, I had an idea to recurse in regions within a regi
 
 ### Cells
 
-The game world consists of recursive layers of cells, where the height and width of each layer is an integer multiple of the previous layer. The primary cell states are occupied and empty. However, there is at least one variation: filled (fully occupied). It is possible that, in later variations, there may be cells which act as empty, but on zoom, actually have some occupied subcells (think of it as dust).
+The game world consists of recursive layers of cells, where the height and width of each layer is an integer multiple of the previous layer. The primary cell states are occupied and empty. However, there is at least one variation: filled (fully occupied).[^dust]
 
 My original design concept was to start with a cell, then recurse to the child cells of that cell, operating on each layer in turn.
 
@@ -135,3 +135,5 @@ I imagine that the worst case example looks something like this:
 ```
 
 In one 5 x 5 region, we have 5 regions that are 3 x 3.
+
+[^dust]: It is possible that, in a future version of the game, there may be cells which act as empty, but on zoom, actually have some occupied subcells (think of them as dust). This is not compatible with the current design (2024-10-26) since sub-regions now have entry and exit points, and zoom can not be activated arbitrarily. Should the design change, dust may be reevaluated.
