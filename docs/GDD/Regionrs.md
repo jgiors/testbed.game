@@ -24,7 +24,7 @@ Regions have entry points, which is how zoom-in is initiated. Once inside, the e
 
 ### Escape out
 
-The player can choose to escape out of the current region and return to the entry point where they started.
+The player can choose to escape out of the current region and return to the entry point where they started. There will need to be a default escape out location so the player can escape out of regions that the avatar started within (since they never entered into the region).
 
 #### TBD
 
