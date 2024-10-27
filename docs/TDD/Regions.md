@@ -10,7 +10,7 @@ While working on this project, I had an idea to recurse in regions within a regi
 
 ### Cells
 
-The game world consists of recursive layers of cells, where the height and width of each layer is an integer multiple of the previous layer. The primary cell states are occupied and empty. However, there is at least one variation: filled (fully occupied).[^dust]
+The game world consists of recursive layers of cells, where the height and width of each layer is an integer multiple of the previous layer. The primary cell states are occupied and empty. However, there is at least one variation: filled (fully occupied). [^dust]
 
 My original design concept was to start with a cell, then recurse to the child cells of that cell, operating on each layer in turn.
 
@@ -19,7 +19,7 @@ Concept
 
 ### What is a region?
 
-The new concept is based on *regions* instead of *cells*. Regions are still made of cells and can be of arbitrary shape, though their extent is limited to prevent excessive recursion and memory consumption. Cells within a region may be occupied, empty, filled, or dust.
+The new concept is based on *regions* instead of *cells*. Regions are still made of cells and can be of arbitrary shape, though their extent is limited to prevent excessive recursion and memory consumption. Cells within a region may be occupied, empty, or filled. [^dust]
 
 ### PCG of regions
 
