@@ -40,7 +40,7 @@ The game begins in the home region. The home region is not the root region. It i
 
 The user will find zoom-in abilities early on, and after getting, say 3 or 4 levels of zoom, the player will be able to find a "-1" zoom ability, which grants the ability to zoom out from the home region (hopefully this is an "aha moment").
 
-Eventually, the player will eventually be able to zoom out all the way to the root region.
+Eventually, the player will be able to zoom out all the way to the root region.
 
 Additional mechanics
 --------------------
