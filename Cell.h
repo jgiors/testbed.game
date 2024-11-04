@@ -2,12 +2,16 @@
 #define ENGINE_CELL_H
 ///@file
 
-#include <vector>
-
 namespace engine {
     ///Cell, which is a recursive set of child cells, though I'm now rethinking that...
     struct Cell {
-        std::vector<std::vector<Cell>> children;
+        enum class State {
+                uninitialized,
+                empty,
+                occupied,
+                filled,
+        };
+        State state;
     };
 }
 
