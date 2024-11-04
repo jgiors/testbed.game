@@ -10,7 +10,10 @@ While working on this project, I had an idea to recurse in regions within a regi
 
 ### Cells
 
-The game world consists of recursive layers of cells, where the height and width of each layer is an integer multiple of the previous layer. The primary cell states are occupied and empty. However, there is at least one variation: filled (fully occupied). [^dust]
+The game world consists of recursive layers of cells, where the height and width of each layer is an integer multiple of the previous layer. The primary cell states are occupied and empty. Additional states are[^dust]:
+
+    - Filled: A cell which is entirely filled solid and impenetrable (all subcells are recursively filled).
+    - Uninitialized: Cell state before it has been assigned a state. Uninitialized cells should never be encountered during gameplay.
 
 My original design concept was to start with a cell, then recurse to the child cells of that cell, operating on each layer in turn.
 
