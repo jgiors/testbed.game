@@ -1,6 +1,11 @@
 {
     "display": {
-        "width" : 200,
-        "height" : 200
-    }
+        "width": 200,
+        "height": 200
+    },
+    "subregion": {
+        "width": 5,
+        "heigh": 5
+    },
+    "zoomFactor": 5
 }
