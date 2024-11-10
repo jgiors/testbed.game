@@ -1,7 +1,7 @@
 #ifndef PRECOMP_H
 #define PRECOMP_H
 
-#include <SFML/Graphics.hpp>
+#include <SFML-2.6.1/include/SFML/Graphics.hpp>
 
 #define NOMINMAX    ///<Prevent Windows from defining min() and max() macros which conflict with std.
 #include <Windows.h>
@@ -14,7 +14,7 @@
 
 #include <json/single_include/nlohmann/json.hpp>
 
-#include <i3lib.h>
+#include "i3lib/i3lib.h"
 
 #include "initLogger.h"
 
