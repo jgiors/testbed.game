@@ -44,7 +44,7 @@
     <ClInclude Include="Region.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Array2.h">
+    <ClInclude Include="LimitedArray2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
