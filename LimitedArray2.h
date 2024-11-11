@@ -17,7 +17,7 @@ namespace engine {
             : maxWidth(MaxWidth), maxHeight(MaxHeight), width(Width), height(Height), elements(MaxWidth * MaxHeight)
             {
                 assert(maxWidth > 0 && maxHeight > 0);
-                assert(width < maxWidth && height < MaxHeight);
+                assert(width <= maxWidth && height <= MaxHeight);
             }
 
             LimitedArray2() = delete;
@@ -27,8 +27,8 @@ namespace engine {
             ///Set new dimensions. Must satisfy (Width <= maxWidth && Height <= maxHeight).
             ///@attention Does not clear the elements of the array.
             void setDims(size_t Width, size_t Height) {
-                assert(Width < maxWidth);
-                assert(Height < maxHeight);
+                assert(Width <= maxWidth);
+                assert(Height <= maxHeight);
                 width = Width;
                 height = Height;
             }
