@@ -1,11 +1,13 @@
 #ifndef ARRAY2_H
 #define ARRAY2_H
+///@file
 
+#include <stddef>
 #include <assert>
 #include <vector>
 
 namespace engine {
-    ///Limited 2-dimensional bounds-checked array class. Index is x, y order, i.e. Array[x][y].
+    ///Limited 2-dimensional bounds-checked array class, indexed array[column][row].
     ///Elements are allocated at construction to support maximum dimensions. Dimensions may be
     ///adjusted after construction, but may not exceed the maximum.
     template <typename T>
@@ -31,6 +33,9 @@ namespace engine {
                 height = Height;
             }
 
+            ///Column which makes double indexing, i.e. array[column][row] possible: Column is
+            ///returned by LimitedArray2::operator[column], then Colmun::operator[row] resolves
+            ///to the element at array[column][row].
             class Column {
                 public:
                     Column(size_t _column, std::vector<T> &Elements, size_t Width, size_t  Height)
