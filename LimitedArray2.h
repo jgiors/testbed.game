@@ -2,8 +2,8 @@
 #define ARRAY2_H
 ///@file
 
-#include <stddef>
-#include <assert>
+#include <cstddef>
+#include <cassert>
 #include <vector>
 
 namespace engine {
@@ -14,7 +14,7 @@ namespace engine {
     class LimitedArray2 {
         public:
             LimitedArray2(size_t MaxWidth, size_t MaxHeight, size_t Width, size_t Height)
-            : maxWidth(MaxWidth), maxHieght(MaxHeight), width(Width), height(Height), elements(MaxWidth * MaxHeight)
+            : maxWidth(MaxWidth), maxHeight(MaxHeight), width(Width), height(Height), elements(MaxWidth * MaxHeight)
             {
                 assert(maxWidth > 0 && maxHeight > 0);
                 assert(width < maxWidth && height < MaxHeight);
@@ -77,9 +77,9 @@ namespace engine {
             size_t getMaxHeight() const { return maxHeight; }
 
             ///Get linear elements.
-            std::vector<T> elements& getElements() { return elements; }
+            std::vector<T>& getElements() { return elements; }
             ///Get linear elements, read-only.
-            const std::vector<T> elements& getElements const { return elements; }
+            const std::vector<T>& getElements() const { return elements; }
 
         private:
             std::vector<T> elements;
