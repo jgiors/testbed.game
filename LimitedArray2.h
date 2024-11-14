@@ -14,23 +14,23 @@ namespace engine {
     class LimitedArray2 {
         public:
             LimitedArray2(size_t MaxWidth, size_t MaxHeight, size_t Width, size_t Height)
-            : maxWidth(MaxWidth), maxHeight(MaxHeight), width(Width), height(Height), elements(MaxWidth * MaxHeight)
+            : _maxWidth(MaxWidth), _maxHeight(MaxHeight), _width(Width), _height(Height), elements(MaxWidth * MaxHeight)
             {
-                assert(maxWidth > 0 && maxHeight > 0);
-                assert(width <= maxWidth && height <= MaxHeight);
+                assert(_maxWidth > 0 && _maxHeight > 0);
+                assert(_width <= _maxWidth && _height <= MaxHeight);
             }
 
             LimitedArray2() = delete;
             LimitedArray2(LimitedArray2&) = delete;
             LimitedArray2& operator=(LimitedArray2&) = delete;
 
-            ///Set new dimensions. Must satisfy (Width <= maxWidth && Height <= maxHeight).
+            ///Set new dimensions. Must satisfy (Width <= _maxWidth && Height <= _maxHeight).
             ///@attention Does not clear the elements of the array.
             void setDims(size_t Width, size_t Height) {
-                assert(Width <= maxWidth);
-                assert(Height <= maxHeight);
-                width = Width;
-                height = Height;
+                assert(Width <= _maxWidth);
+                assert(Height <= _maxHeight);
+                _width = Width;
+                _height = Height;
             }
 
             ///Column which makes double indexing, i.e. array[column][row] possible: Column is
@@ -62,19 +62,19 @@ namespace engine {
             };
 
             Column operator[](size_t column) {
-                assert(column < width);
-                return Column(column, elements, width, height);
+                assert(column < _width);
+                return Column(column, elements, _width, _height);
             }
 
             const Column operator[](size_t column) const {
-                assert(column < width);
-                return Column(column, elements, width, height);
+                assert(column < _width);
+                return Column(column, elements, _width, _height);
             }
 
-            size_t getWidth() const { return width; }
-            size_t getHeight() const { return height; }
-            size_t getMaxWidth() const { return maxWidth; }
-            size_t getMaxHeight() const { return maxHeight; }
+            size_t width() const { return _width; }
+            size_t height() const { return _height; }
+            size_t maxWidth() const { return _maxWidth; }
+            size_t maxHeight() const { return _maxHeight; }
 
             ///Get linear elements.
             std::vector<T>& getElements() { return elements; }
@@ -83,10 +83,10 @@ namespace engine {
 
         private:
             std::vector<T> elements;
-            size_t width;
-            size_t height;
-            size_t maxWidth;
-            size_t maxHeight;
+            size_t _width;
+            size_t _height;
+            size_t _maxWidth;
+            size_t _maxHeight;
     };
 } //namespace engine
 

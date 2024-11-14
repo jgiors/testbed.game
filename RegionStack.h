@@ -1,5 +1,5 @@
-#ifndef REGIONCACHE_H
-#define REGIONCACHE_H
+#ifndef REGIONSTACK_H
+#define REGIONSTACK_H
 
 #include <memory>
 #include <vector>
@@ -8,10 +8,12 @@
 namespace engine {
     class RegionCache {
     public:
-        ///@todo
+    
     private:
-        std::vector<std::unique_ptr<Region>> cache;
+        std::vector<Region> cache;
+        Region *pRoot;
+        Region *pCurrent;
     };
 } //namespace engine
 
-#endif //REGIONCACHE_H
+#endif //REGIONSTACK_H
