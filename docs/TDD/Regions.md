@@ -109,7 +109,9 @@ Maximum sub-region size
 
 ```math
 Wsubmax * Z = Wmax  ->  Wsubmax = Wmax / Z
+```
 
+```math
 Hsubmax * Z = Hmax  ->  Hsubmax = Hmax / Z
 ```
 
