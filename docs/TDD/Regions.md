@@ -107,12 +107,12 @@ Maximum sub-region size
 - Since there are Z x Z subcells per cell, a sub-region of dimension W x H contains W*Z x W*H sub-cells.
 - Therefore, in order to prevent exceeding Wmax x Hmax:
 
-    Wsubmax * Z = Wmax  ->  Wsubmax = Wmax / Z
-    Hsubmax * Z = Hmax  ->  Hsubmax = Hmax / Z
+$$Wsubmax * Z = Wmax  ->  Wsubmax = Wmax / Z
+$$Hsubmax * Z = Hmax  ->  Hsubmax = Hmax / Z
 
 - The number of cells in the maximum-sized region is:
 
-    TotalCells = Wmax * Hmax
+$$TotalCells = Wmax * Hmax
 
 - Because of this multiplicative property, the number of cells which must be processed increases rapidly, even for modest sub-region dims and zoom factors.
 
