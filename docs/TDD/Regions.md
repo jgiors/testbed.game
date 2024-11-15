@@ -1,6 +1,9 @@
 Regions TDD
 ===========
 
+> [!IMPORTANT]
+> A proposal is under way to allow zoom factors to change for each region.
+
 Background
 ----------
 
