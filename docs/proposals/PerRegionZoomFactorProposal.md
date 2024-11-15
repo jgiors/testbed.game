@@ -23,6 +23,7 @@ Proposal Statement
 3. Constrain the zoom factor between minimum and maximum bounds.
 4. Regions continue to be an integral number of same-sized, square cells.
 
-> [!NOTE] Item 4 is a more concise way of stating the intuitive, but potentially ambiguous, notion that *"zoom should be constant within a region"*.
+> [!NOTE]
+> Item 4 is a more concise way of stating the intuitive, but potentially ambiguous, notion that *"zoom should be constant within a region"*.
 
 todo
