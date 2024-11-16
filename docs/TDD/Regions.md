@@ -1,9 +1,6 @@
 Regions TDD
 ===========
 
-> [!IMPORTANT]
-> A proposal is under way to allow zoom factors to change for each region.
-
 Background
 ----------
 
@@ -91,16 +88,21 @@ The algorithm continues recursively through sub-regions until reaching the curre
 Parameters
 ----------
 
-- Wmax x Hmax = maximum region dimensions
-    - The dimensions are the number of subcells wide by tall (height).
-    - I expect Wmax = Hmax, but the dimensions will be tracked separately, just in case.
-- Z = zoom factor = number of sub-cells wide/tall per cell
-    - How much zoom is applied at each level.
-    - Also happens to determine the cell/sub-cell relationship.
-        - Each cell contains Z x Z subcells because height and width are constrained by zoom and must be equal.
+- MaxArea := Maximum number of cells in the bounding rectangle of a region.
+- Width x Height := The width and height of a region instance.
+    - Additional constraints: MinWidth <= Width <= MaxWidth ; MinHeight <= Height <= MaxHeight
+        - Potential violations of these constraints need to be handled.
+- ZoomFactor = Integer number of linear sub-region cells per parent region cell. Varies per region.
+    - Each cell contains Z x Z subcells because height and width are constrained by zoom and must be equal.
+    - Limited to MinZoomFactor <= ZoomFactor <= MaxZoomFactor
+- MaxChildren := Limit on number of child regions per region.
+- MaxProductiveChildren := Limit on number of child regions which may propagate further child regions.
+    - Note: Filled child regions do not propagate, so when above this limit, excess children are marked filled.
 
 Maximum sub-region size
 -----------------------
+
+TODO: Update calculations based on 
 
 ### Sub-region, region, and zoom relationship
 
