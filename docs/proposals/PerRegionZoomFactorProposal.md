@@ -47,4 +47,26 @@ Analysis
     - If it falls outside the range:
         - For ZoomFactor > Zmax: ZoomFactor = Zmax
         - For ZoomFactor < Zmin: Split up the region
-    - Will also split regions that are too skinny (excessively wide or tall). This is a design consideration, not a technical constraint.
+    - Will also split regions that are too skinny (excessively wide or tall). This is a design consideration, not a technical limitation.
+
+### Pros
+
+- Regions will on average contain more cells, providing more variety of regions (and hopefully more player interest).
+- Individual regions will more efficiently use the pre-allocated cell array.
+- Less region splits needed to meet constraints.
+    - Corollary: More flexibility in region shapes.
+
+### Cons
+
+- Because some regions have a small relative zoom factor, it will be necessary to store more layers of descendants.
+    - This could lead to larger quantities of descendants (despite smaller zoom factor) because of exponential nature of fan-out.
+    - Makes it more difficult to predict the upper bound of allocations.
+        - (But can be addressed by enforcing limits by removing regions, converting some regions to impenetrable, or starting over on bad result.)
+- Related logic is not quite as simple (but not very complex).
+- The greater variability of potential region shapes and zoom factors increases the possibility space for testing.
+- If the game design moves away from single-region exploration, per-region zoom factors may become problematic.
+
+Conclusion
+----------
+
+Per-regions zoom factors have several advantages. Player experience is expected to be improved due to the greater variety of regions that can be produced. The tradeoffs in somewhat greater complexity (which is not anticipated to be excessive) and likely higher memory usage are probably worth the improved player experience.
