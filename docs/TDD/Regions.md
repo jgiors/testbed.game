@@ -89,9 +89,11 @@ Parameters
 ----------
 
 - MaxArea := Maximum number of cells in the bounding rectangle of a region.
-- Width x Height := The width and height of a region instance.
+- Width x Height := The dimensions of a region instance in cells.
+    - Basic region limitation: Area = Width * Height <= MaxArea
     - Additional constraints: MinWidth <= Width <= MaxWidth ; MinHeight <= Height <= MaxHeight
-        - Potential violations of these constraints need to be handled.
+        - Prevents excessively thin (very wide or very tall) regions.
+        - Potential violations of these constraints need to be handled, e.g. by splitting the region.
 - ZoomFactor = Integer number of linear sub-region cells per parent region cell. Varies per region.
     - Each cell contains Z x Z subcells because height and width are constrained by zoom and must be equal.
     - Limited to MinZoomFactor <= ZoomFactor <= MaxZoomFactor
@@ -99,10 +101,8 @@ Parameters
 - MaxProductiveChildren := Limit on number of child regions which may propagate further child regions.
     - Note: Filled child regions do not propagate, so when above this limit, excess children are marked filled.
 
-Maximum sub-region size
+Child region attributes
 -----------------------
-
-TODO: Update calculations based on 
 
 ### Sub-region, region, and zoom relationship
 
