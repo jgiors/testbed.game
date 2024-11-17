@@ -85,51 +85,40 @@ The other sub-regions would be recursed similarly. In the case of this region, t
 
 The algorithm continues recursively through sub-regions until reaching the current zoom level.
 
-Parameters
-----------
+Parameters and their relationships
+----------------------------------
 
-- MaxArea := Maximum number of cells in the bounding rectangle of a region.
-- Width x Height := The dimensions of a region instance in cells.
-    - Basic region limitation: Area = Width * Height <= MaxArea
-    - Additional constraints: MinWidth <= Width <= MaxWidth ; MinHeight <= Height <= MaxHeight
-        - Prevents excessively thin (very wide or very tall) regions.
-        - Potential violations of these constraints need to be handled, e.g. by splitting the region.
-- ZoomFactor = Integer number of linear sub-region cells per parent region cell. Varies per region.
-    - Each cell contains Z x Z subcells because height and width are constrained by zoom and must be equal.
-    - Limited to MinZoomFactor <= ZoomFactor <= MaxZoomFactor
+### Region dimensions and area
+
+- Width x Height := Dimensions of a region's bounding box, measured in linear cells.
+- Area := Area of region's bounding box in cells = Width * Height
+- MaxArea := Maximum number of cells in region's bounding box.
+    - Area = Width * Height <= MaxArea
+- Additional constraint: MinWidth <= Width <= MaxWidth ; MinHeight <= Height <= MaxHeight
+    - Prevents excessively thin (very wide or very tall) regions.
+    - Potential violations of these constraints need to be handled, e.g. by splitting the region or making it solid (not enterable).
+
+### Child Regions
+
+Child regions are defined in relationship to their parent region.
+
+#### Zoom factor
+
+- ZoomFactor := Integer number of linear sub-region cells per parent region cell. Varies per region. Horizontal and vertical are same factor.
+    - Constraint: MinZoomFactor <= ZoomFactor <= MaxZoomFactor
+- AreaMultiplier := ZoomFactor ^ 2 = Cell area multiplier when comparing child region size in parent cells vs child cells.
+- ChildWidth x ChildHeight := Dimensions of a region's bounding box in its parent's zoom level.
+- The relationship between child dimensions and child cells: ChildWidth * ChildHeight * ZoomFactor^2 = Area <= MaxArea
+- Therefore: ZoomFactorTarget = sqrt(MaxArea / (ChildWidth * ChildHeight))
+- The ZoomFactorTarge must be compared against other constraints to determine the actual ZoomFactor to use.
+
+#### Additional constraints
+
 - MaxChildren := Limit on number of child regions per region.
 - MaxProductiveChildren := Limit on number of child regions which may propagate further child regions.
-    - Note: Filled child regions do not propagate, so when above this limit, excess children are marked filled.
+    - Note: Filled child regions do not propagate, so when this limit is hit, action must be taken. One possibility is to make the region solid.
 
-Child region attributes
------------------------
-
-### Sub-region, region, and zoom relationship
-
-- Since there are Z x Z subcells per cell, a sub-region of dimension W x H contains W*Z x W*H sub-cells.
-- Therefore, in order to prevent exceeding Wmax x Hmax:
-
-```math
-Wsubmax * Z = Wmax  ->  Wsubmax = Wmax / Z
-```
-
-```math
-Hsubmax * Z = Hmax  ->  Hsubmax = Hmax / Z
-```
-
-- The number of cells in the maximum-sized region is:
-
-```math
-TotalCells = Wmax * Hmax
-```
-
-- Because of this multiplicative property, the number of cells which must be processed increases rapidly, even for modest sub-region dims and zoom factors.
-
-### Dividing large sub-regions
-
-Since sub-regions are limited in dimension, some nominal regions will be larger than the maximum region dims. These nominal regions will be split into smaller regions which do not exceed the maximum dims.
-
-### Numbers in practice
+#### Example calculations
 
 See RegionDimensions.ods
 
