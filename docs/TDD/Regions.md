@@ -117,6 +117,8 @@ Child regions are defined in relationship to their parent region.
 - MaxChildren := Limit on number of child regions per region.
 - MaxProductiveChildren := Limit on number of child regions which may propagate further child regions.
     - Note: Filled child regions do not propagate, so when this limit is hit, action must be taken. One possibility is to make the region solid.
+    - The potential total number of productive descendants at a zoom level increases exponentially: MaxProductiveCellsAtZoomLevel = MaxArea * (MaxProductiveChildren ^ ZoomLevel)
+        - Note: This does not include non-productive children.
 
 #### Example calculations
 
