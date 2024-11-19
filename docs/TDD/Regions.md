@@ -118,7 +118,8 @@ Child regions are defined in relationship to their parent region.
 - MaxProductiveChildren := Limit on number of child regions which may propagate further child regions.
     - Note: Filled child regions do not propagate, so when this limit is hit, action must be taken. One possibility is to make the region solid.
     - The potential total number of productive descendants at a zoom level increases exponentially: MaxProductiveCellsAtZoomLevel = MaxArea * (MaxProductiveChildren ^ ZoomLevel)
-        - Note: This does not include non-productive children.
+- MaxUnroductiveChildren := Limit on number of child regions which can not propagate further child regions.
+    - Obviously: MaxUnroductiveChildren + MaxProductiveChildren = MaxChildren
 
 #### Example calculations
 
@@ -146,17 +147,50 @@ I imagine that the worst case example looks something like this:
 #####·#####·#
 ```
 
+TODO: Fix this explanation and/or the above example! The above region 13 x 5 and most of the overlapping child regions are 5 x 3.
+
 In one 5 x 5 region, we have 5 regions that are 3 x 3.
 
 Region stack
 ------------
 
-The avatar will be in a particular region in a layer at a particular zoom level. That region will be part of a stack of ancestor regions, which must also remain memory-resident so that zooming-out can be performed efficiently, and so that escape out can be performed properly.
+### Motivation
 
-RegionCache
------------
+The avatar will be in a particular region at a particular zoom level. Above that zoom level will be a series of regions, back to the root region at the root level. It makes sense to store this as a LIFO stack.
 
-In order to prevent repeated heap allocations and frees, Regions are cached. When items are added to, or removed from the Region stack, they are taken from, or replaced to the cache. The RegionCache is just a simple wrapper around a std::vector.
+### Memory pre-allocation
+
+The region stack will be pre-allocated upon startup so that no dynamic allocations are made during gameplay.
+
+### Partial recursion complications
+
+With expected region PCG parameters, correctly defining a region will require some amount of recursion into child regions and further descendant regions.
+
+This has implications for a stack implementation:
+
+- Allocating and executing the PCG on a single region at a particular zoom level must account for the creation of potentially many regions.
+    - This must be taken into account when attempting to determine how many regions (and cells) to pre-allocate.
+- The PCG must know when to stop recursing.
+- The PCG must be aware of pre-existing regions when processing a region. That region will already exist on the stack, so in reality, the PCG must recurse down into the children/descendants and allocate/process only the bottom level of the cache.
+
+TODO: Note that there are basically 2 parts: (1) the cells region in the parent, (2) the cells making up the region at its own zoom level. It is possible for (1) to exist without (2).
+
+### calculations
+
+TODO: Calculations
+
+The basic ideas are something like this:
+- Stack starts with a region at zoom level 0 and there is also a current region at CurrentZoomLevel.
+    - However, the final regions will be at some zoom level >= CurrentZoomLevel.
+- A region can have up to MaxUnroductiveChildren which will end up with a limited amount of recursion.
+    - For initial designs, we can assume these are solid filled, so they will only need to track the cells region in the parent, and can be assumed to be of that size.
+- A region can have up to MaxProductiveChildren, and each of those can have up to MaxProductiveChildren as well, up to some zoom level delta.
+    - The total number of possible productive children, plus the region itself, will be = MaxProductiveChildren ^ (ZoomLevelDelta + 1).
+    - We would also need to account for which of these require nodes to be allocated, and which don't.
+- That only covers the data for fleshing out one region.
+- We need to account for each level of zoom.
+    - However, the additional for each level of zoom will be a little less than what the above implies because some of the regions for the child region will have already been allocated when processing the parent.
+- Probably need to analyze by looking at the differential for each added zoom level, rather than trying to directly compute the total (then add back in the top few layers which cannot be handled by this differential).
 
 
 [^dust]: It is possible that, in a future version of the game, there may be cells which act as empty, but on zoom, actually have some occupied subcells (think of them as dust). This is not compatible with the current design (2024-10-26) since sub-regions now have entry and exit points, and zoom can not be activated arbitrarily. Should the design change, dust may be reevaluated.
