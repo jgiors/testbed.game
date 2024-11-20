@@ -177,7 +177,7 @@ TODO: Note that there are basically 2 parts: (1) the cells region in the parent,
 
 ### calculations
 
-TODO: Calculations
+TODO: Calculations & differential stack implementation (issue #27).
 
 The basic ideas are something like this:
 - Stack starts with a region at zoom level 0 and there is also a current region at CurrentZoomLevel.
