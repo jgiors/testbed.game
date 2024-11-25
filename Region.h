@@ -3,30 +3,33 @@
 ///@file
 
 #include <vector>
+#include <SFML-2.6.1/include/SFML/Graphics.hpp>
 #include "LimitedArray2.h"
 #include "Cell.h"
 
 namespace engine {
+    ///
     class Region {
         public:
-            Region(Region *pParent, size_t maxWidth, size_t maxHeight, size_t maxChildren);
+            Region(Region *pParent);
             Region() = delete;
             Region(Region &) = delete;
 
-            void setDims(size_t width, size_t height) { _cells.setDims(width, height); } 
-
-            LimitedArray2<Cell>& cells() { return _cells; }
-            const LimitedArray2<Cell>& cells() const { return _cells; }
+            LimitedArray2<Cell>* pCells() { return _pCells; }
+            const LimitedArray2<Cell>* pCells() const { return _pCells; }
+            void pCells(LimitedArray2<Cell> *p) { _pCells = p; }
 
             std::vector<Region&>& children() { return _children; }
             const std::vector<Region&>& children() const { return _children; }
 
             Region* parent() { return _pParent; }
             const Region* parent() const { return _pParent; }
-            void parent(Region *pParent) { _pParent = pParent; }
+
+            // size_t widthInParent;
+            // size_t heightInParent;
 
         private:
-            LimitedArray2<Cell> _cells;
+            LimitedArray2<Cell> *_pCells;
             std::vector<Region&> _children;
             Region *_pParent;
     };

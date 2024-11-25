@@ -5,15 +5,18 @@
 #include <cstddef>
 #include <cassert>
 #include <vector>
+#include <SFML-2.6.1/include/SFML/Graphics.hpp>
 
 namespace engine {
-    ///Limited 2-dimensional bounds-checked array class, indexed as array[column][row].
+    ///Limited 2-dimensional bounds-checked array class, indexed as array[column][row],
+    ///which matches the order of (x,y) coordinates.
     ///Elements are allocated at construction and can not be resized.
+    ///@note    Items are in column-major order which is contrary to usual C++ row-major order.
     template <typename T>
     class LimitedArray2 {
         public:
-            LimitedArray2(size_t Width, size_t Height)
-            : _width(Width), _height(Height), _elements(Width * Height)
+            LimitedArray2(sf::Vector2u Dims)
+            : _elements(Dims.x * Dims.y), _dims(Dims)
             {
             }
 
@@ -26,51 +29,49 @@ namespace engine {
             ///to the element at array[column][row].
             class Column {
                 public:
-                    Column(size_t _column, std::vector<T> &Elements, size_t Width, size_t Height)
-                    : column(_column), elements(Elements), width(Width), height(Height)
+                    Column(std::vector<T> &Elements, unsigned Base, unsigned height)
+                    : elements(Elements), base(Base), height(Height)
                     {
-                        assert(column < width);
                     }
 
-                    T& operator[](size_t row) {
+                    T& operator[](unsigned row) {
                         assert(row < height);
-                        return elements[row * width + column];
+                        return elements[base + row];
                     }
 
-                    const T& operator[](size_t row) const {
+                    const T& operator[](unsigned row) const {
                         assert(row < height);
-                        return elements[row * width + column];
+                        return elements[base + row];
                     }
 
                 private:
                     std::vector<T> &elements;
-                    size_t column;
-                    size_t width;
-                    size_t height;
+                    unsigned base;
+                    unsigned height;
             };
 
+            ///Obtain column for double-indexing.
             Column operator[](size_t column) {
                 assert(column < _width);
-                return Column(column, elements, _width, _height);
+                return Column(elements, column * _height, height);
             }
 
+            ///Obtain column for double-indexing.
             const Column operator[](size_t column) const {
                 assert(column < _width);
-                return Column(column, elements, _width, _height);
+                return Column(elements, column * _height, height);
             }
 
-            size_t width() const { return _width; }
-            size_t height() const { return _height; }
+            sf::Vector2u dims() const { return _dims; }
 
             ///Get linear elements.
-            std::vector<T>& elements() { return elements; }
+            std::vector<T>& elements() { return _elements; }
             ///Get linear elements, read-only.
-            const std::vector<T>& elements() const { return elements; }
+            const std::vector<T>& elements() const { return _elements; }
 
         private:
-            std::vector<T> _elements;
-            size_t _width;
-            size_t _height;
+            std::vector<T> _elements;   ///<Linear elements of the 2D array.
+            sf::Vector2u _dims;         ///<Array dimensions.
     };
 } //namespace engine
 
