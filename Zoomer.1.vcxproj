@@ -35,7 +35,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LimitedArray2.h" />
+    <ClInclude Include="Array2.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="initLogger.h" />
     <ClInclude Include="precomp.h" />

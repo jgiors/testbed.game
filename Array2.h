@@ -8,24 +8,24 @@
 #include <SFML-2.6.1/include/SFML/Graphics.hpp>
 
 namespace engine {
-    ///Limited 2-dimensional bounds-checked array class, indexed as array[column][row],
+    ///2-dimensional bounds-checked array class, indexed as array[column][row],
     ///which matches the order of (x,y) coordinates.
     ///Elements are allocated at construction and can not be resized.
-    ///@note    Items are in column-major order which is contrary to usual C++ row-major order.
+    ///@note Items are in column-major order which is contrary to usual C++ row-major order.
     template <typename T>
-    class LimitedArray2 {
+    class Array2 {
         public:
-            LimitedArray2(sf::Vector2u Dims)
+            Array2(sf::Vector2u Dims)
             : _elements(Dims.x * Dims.y), _dims(Dims)
             {
             }
 
-            LimitedArray2() = delete;
-            LimitedArray2(LimitedArray2&) = delete;
-            LimitedArray2& operator=(LimitedArray2&) = delete;
+            Array2() = delete;
+            Array2(Array2&) = delete;
+            Array2& operator=(Array2&) = delete;
 
             ///Column which makes double indexing, i.e. array[column][row] possible: Column is
-            ///returned by LimitedArray2::operator[column], then Colmun::operator[row] resolves
+            ///returned by Array2::operator[column], then Colmun::operator[row] resolves
             ///to the element at array[column][row].
             class Column {
                 public:

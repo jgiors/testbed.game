@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 #include <SFML-2.6.1/include/SFML/Graphics.hpp>
-#include "LimitedArray2.h"
+#include "Array2.h"
 #include "Cell.h"
 
 namespace engine {
@@ -13,7 +13,7 @@ namespace engine {
     struct Region {
             ///This region's cell array or NULL.
             ///@note Regions far enough beyond the current zoom level(s) do not have a cell array.
-            LimitedArray2<std::unique_ptr<Cell>> pCells;
+            Array2<std::unique_ptr<Cell>> pCells;
             ///Children of this region.
             ///@note Regions far enough beyond the current zoom level(s) have no children.
             std::vector<std::unique_ptr<Region>> children;
