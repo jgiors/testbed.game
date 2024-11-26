@@ -30,7 +30,7 @@
     <ClCompile Include="Region.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RegionStack.cpp">
+    <ClCompile Include="RegionTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,7 +50,7 @@
     <ClInclude Include="Array2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RegionStack.h">
+    <ClInclude Include="RegionTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
