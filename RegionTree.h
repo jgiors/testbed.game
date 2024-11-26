@@ -1,19 +1,30 @@
-#ifndef REGIONSTACK_H
-#define REGIONSTACK_H
+#ifndef REGIONTREE_H
+#define REGIONTREE_H
 
 #include <memory>
 #include <vector>
 #include "Region.h"
 
 namespace engine {
-    class RegionCache {
+    ///Region tree for tracking existing regions. Does not handle expansion of regions or descendant
+    ///removal, which are PCG responsibilities.
+    class RegionTree {
     public:
+        RegionTree() : _activeRegion(_root) {}
+        RegionTree(RegionTree&) = delete;
+        RegionTree& operator=(RegionTree&) = delete;
+
+        const Region& root() const { return _root; }
+        Region& root() { return _root; }
+
+        const Region& activeRegion() const { return _activeRegion; }
+        Region& activeRegion() { return _activeRegion; }
+        void activeRegion(Region &r) { _activeRegion = r; }
     
     private:
-        std::vector<Region> cache;
-        Region *pRoot;
-        Region *pCurrent;
+        Region _root;
+        Region &_activeRegion;
     };
 } //namespace engine
 
-#endif //REGIONSTACK_H
+#endif //REGIONTREE_H
